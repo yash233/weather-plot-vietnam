@@ -1,0 +1,32 @@
+import openpyxl
+import matplotlib.pyplot as plt
+loc=r'/Users/harshadhikari/Desktop/MekongWeather.xlsx'
+  #”loc subject to change”
+  #link for the weather data ‘https://www.timeanddate.com/weather/@1574717/climate'
+wb=openpyxl.load_workbook(loc)
+sheet=wb.active
+months=[]
+LT=[]
+MT=[]
+HT=[]
+PP=[]
+for i in range(2,14):
+    months.append(sheet.cell(i,1).value)
+    LT.append(sheet.cell(i,2).value)
+    HT.append(sheet.cell(i,3).value)
+    MT.append(sheet.cell(i,4).value)
+    PP.append(sheet.cell(i,5).value)
+plt.xkcd()
+plt.grid(True)
+plt.plot(months,LT,color='#88D3FF',marker='o',label='Least Temprature')
+plt.plot(months,MT,color='#D4FF00',marker='o',label='Mean Temprature')
+plt.plot(months,HT,color='#FFBF00',marker='o',label='High Temprature')
+plt.fill_between(months,LT,color='red',alpha=1)
+plt.fill_between(months,MT,color='green',alpha=0.6)
+plt.fill_between(months,HT,color='blue',alpha=0.3)
+plt.xlabel("Months")
+plt.ylabel("Temprature in Celsius")
+plt.legend()
+plt.yticks(ticks=[i for i in range(20,40)])
+plt.ylim(20,40)
+plt.show()
